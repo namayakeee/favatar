@@ -4,7 +4,7 @@ const crypto = require('crypto');
 module.exports = (req, res) => {
   // id should be base64 encoded string
   const { id } = req.params;
-  const { size = 720 } = req.query;
+  const { size = 240 } = req.query;
   const imageSize = Math.min(Math.max(parseInt(size) || 240, 240), 2048);
 
   const decodedId = Buffer.from(id, 'base64').toString('ascii');
