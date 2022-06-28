@@ -11,7 +11,7 @@
       if (content) {
         const encodedContent = btoa(content);
 
-        const imageLink = `https://favatar-1a66b.kxcdn.com/capital/${encodedContent}`;
+        const imageLink = `/avatar/capital/${encodedContent}`;
 
         const params = [];
         const size = Math.min(Math.max(parseInt(document.getElementById('size').value) || 240, 240), 2048);
@@ -24,6 +24,8 @@
 
         const fullLink = `${imageLink}${params.length === 0 ? '' : '?'}${params.join('&')}`;
         document.getElementById('favatar').style.backgroundImage = `url('${fullLink}')`;
+        document.getElementById('result').innerText = `https://favatar-1a66b.kxcdn.com${fullLink}`;
+        document.getElementById('result').style.display = 'block';
       } else {
         alert('content is required.');
       }
@@ -34,7 +36,8 @@
   <div class="w-full h-full fixed top-0 left-0 flex flex-col items-center justify-center">
     <div class="rounded-full bg-gray w-24 h-24 bg-center bg-cover bg-no-repeat" 
       id="favatar"
-      style="background-image: url('/capital/ZmxvYXRmbG93ZXIxMDI5QGdtYWlsLmNvbQ==');"></div>
+      style="background-image: url('/avatar/capital/ZmxvYXRmbG93ZXIxMDI5QGdtYWlsLmNvbQ==');"></div>
+    <div class="p-4 rounded mt-8 bg-amber-200 text-sm break-normal overflow-x-auto hidden" id="result"></div>
     <div class="w-3/4 lg:w-1/3 grid grid-cols-5 gap-4 mt-8 flex flex-row items-center">
       <div class="col-span-2">content</div>
       <div class="col-span-3">
