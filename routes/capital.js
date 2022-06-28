@@ -8,12 +8,14 @@ module.exports = (req, res) => {
   const imageSize = Math.min(Math.max(parseInt(size) || 240, 240), 2048);
 
   const decodedId = Buffer.from(id, 'base64').toString('ascii');
-  console.log(decodedId);
   const hash = crypto.createHash('sha256').update(decodedId).digest('hex');
-  console.log(hash)
   const canvas = createCanvas(imageSize, imageSize)
   const ctx = canvas.getContext('2d')
+  
   ctx.fillStyle = `#${hash.substring(0, 6).toLowerCase()}`;
+  const { color } = req.query;
+  if (color && /^[0-9a-f]{6}$/.test(color)) ctx.fillStyle = `#${color}`;
+
   ctx.fillRect(0, 0, imageSize, imageSize);
   ctx.fillStyle = `#FFFFFF`;
   ctx.textAlign = "center";
