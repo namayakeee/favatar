@@ -26,6 +26,7 @@ module.exports = (req, res) => {
   res.set({
     'Content-disposition': `filename="image.png"`,
     'Content-Type': 'image/jpeg',
+    'Cache-Control': 'public,max-age=31536000,immutable'
   })
   canvas.createPNGStream().pipe(res);
   // res.send('asd');
